@@ -9,4 +9,4 @@ if __name__ == '__main__':
     result = add(a, b)
     
 # print the result of the addition
-print('{} + {} = {}'.format(a, b, add(a, b)))
+print('{:d} + {:d} = {:d}'.format(a, b, add(a, b)))
