@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 if __name__ == '__main__':
-    import sys
-    arg = sys.argv
+    from sys import argv
+    arg = argv
     size = len(arg)
     if size > 1:
         print("{} arguments:".format(size))
