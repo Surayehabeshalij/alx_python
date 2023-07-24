@@ -1,3 +1,4 @@
+
 import sys
 
 # get the number of arguments
@@ -17,3 +18,6 @@ if num_args > 0:
         print("{}: {}".format(i, sys.argv[i]))
 else:
     print(".")
+
+if __name__ == '__main__':
+    pass
