@@ -2,7 +2,7 @@
 if __name__ == '__main__':
     import sys
     arg=sys.argv
-    size= len(arg)-1
+    size= len(arg)
 # print the number of arguments
 if size>1:
     print("{} arguments:".format(size))
