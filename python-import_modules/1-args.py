@@ -6,10 +6,10 @@ if __name__ == '__main__':
     if size>1:
         print("{} arguments:".format(size))
         for i in range(size):
-            print("{}:{}".format(i+1, arg[i]))
+            print("{}: {}".format(i+1, arg[i]))
     elif size == 0:
         print("{} arguments:".format(size))
-    else:
-        print("{} argument:".format(size))
-        print("{}:{}".format(i, arg[0]))
+    elif size ==1:
+        print("1 argument:")
+        print("1: {}".format(arg[0]))
     
