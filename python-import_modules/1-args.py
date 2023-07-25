@@ -10,6 +10,6 @@ if __name__ == '__main__':
         elif size == 1:
             print("1 argument:")
             print("1: {}".format(arg[0]))
-    except :
-        print("{} arguments.".format(size))
+    except EOFError :
+        print("0 arguments.")
     
