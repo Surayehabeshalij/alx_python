@@ -3,7 +3,7 @@ if __name__ == '__main__':
     
     try :
         import sys
-        arg = sys.argv
+        arg = str(sys.argv)
         #arg = input().split()
         size = len(arg)
         if size > 1:
