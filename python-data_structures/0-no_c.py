@@ -11,6 +11,3 @@ def no_c(my_string):
     
     # Return the new string
     return new_string#
-# Call the no_c function with a string
-result = no_c("This is a test string with c and C characters")
-print(result) # Output: "This is a test string with  and  haraters"
