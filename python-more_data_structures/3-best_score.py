@@ -1,8 +1,7 @@
 def best_score(a_dictionary):
     # Initialize the best key and value to None
     best_key = None
-    best_value = None
-    my_dict = None   
+    best_value = None  
     
     # Loop through each key-value pair in the dictionary
     for key, value in a_dictionary.items():
