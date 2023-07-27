@@ -10,4 +10,11 @@ def best_score(a_dictionary):
             best_value = value
     # Return the best key
     return best_key
+     if a_dictionary is None:
+        return None
+    best_key = None
+    for key, value in a_dictionary.items():
+        if best_key is None or value > a_dictionary[best_key]:
+            best_key = key
+    return best_key
     
