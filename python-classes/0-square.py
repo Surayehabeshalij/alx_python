@@ -10,5 +10,4 @@ class Square:
         try:
             print(mysquare._size)
         except Exception as e:
-            print(e)  
-                   
+            print(e)                 
