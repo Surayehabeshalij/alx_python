@@ -1,9 +1,9 @@
 class Square:
     def __init__(self, size):
-        self.__size = size
+        self.__size = size   
     def area(self):
-        print(Square.area.__doc__)
         return self.__size ** 2
+    print(Square.area.__doc__)
     def dict_(self):    
         mysquare = Square(3)
         print(type(mysquare))  # <class 'square.Square'>
