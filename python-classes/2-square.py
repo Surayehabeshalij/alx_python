@@ -8,7 +8,7 @@ class Square:
             self.__size = size
     def area(self):
         return self.__size ** 2
-     __doc__ = """
+    __doc__ = """
     this is doc for class
     """
 __doc__ = """
