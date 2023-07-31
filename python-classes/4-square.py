@@ -16,6 +16,7 @@ class Square:
     
     def area(self):
         return self.size ** 2
+        
     def my_print(self):
         if self.size == 0:
             print()
@@ -24,7 +25,7 @@ class Square:
                 for j in range(self.size):
                     print("#", end="")
                 print()
-    __doc__ = """
+     __doc__ = """
     this is doc for class
     """
 __doc__ = """
