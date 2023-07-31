@@ -25,4 +25,5 @@ class Square:
     this is doc for class
     """
 __doc__ = """
-    this is doc for module"""
+    this is doc for module     
+    """
