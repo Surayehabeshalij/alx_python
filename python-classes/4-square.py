@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class Square:
     def __init__(self, size=0):
         self.size = size              
@@ -25,9 +26,9 @@ class Square:
                 for j in range(self.size):
                     print("#", end="")
                 print()
-    __doc__ = """
-    this is doc for class
+     __doc__ = """
+    this is documentation for my class
     """
 __doc__ = """
-    this is doc for module
-    """
+this is documentation for my module
+"""
