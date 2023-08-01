@@ -26,9 +26,9 @@ class Square:
                 for j in range(self.size):
                     print("#", end="")
                 print()
-     __doc__ = """
-    this is documentation for my class
+    __doc__= """
+    this is doc for class
     """
-__doc__ = """
-    this is documentation for my module
+__doc__="""
+this is doc for class
 """
