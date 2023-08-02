@@ -1,14 +1,9 @@
 #!/usr/bin/python3
+"""Module containing is_kind_of_class method"""
+
+
 def is_kind_of_class(obj, a_class):
+    """returns True if the object is an instance of, or if the
+    object is an instance of a class that inherited from
+    the specified class ; otherwise False """
     return isinstance(obj, a_class)
-class MyBaseClass:
-    pass
-
-class MyClass(MyBaseClass):
-    pass
-
-obj = MyClass()
-print(is_kind_of_class(obj, MyBaseClass))  # True
-print(is_kind_of_class(obj, MyClass))  # True
-print(is_kind_of_class(obj, int))  # False
-print(is_kind_of_class(obj, object))  # True
