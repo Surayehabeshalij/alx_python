@@ -1,10 +1,6 @@
 #!/usr/bin/python3
-class BaseGeometry:
+"""BaseGeometry class Module"""
+class BaseGeometry():
+    """BaseGeometry empty class"""
     pass
-    __doc__="""
-    this documentation for my method    
-    """
-__doc__="""
-this documentation for my class
-"""
     
