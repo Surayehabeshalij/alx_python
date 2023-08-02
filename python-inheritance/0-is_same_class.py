@@ -6,6 +6,10 @@ class MyClass:
     pass
 
 obj = MyClass()
-print(is_same_class(obj, MyClass))  # True
-print(is_same_class(obj, int))  # False
-print(is_same_class(obj, object))  # True
+a = 1
+if is_same_class(a, int):
+    print("{} is an instance of the class {}".format(a, int.__name__))
+if is_same_class(a, float):
+    print("{} is an instance of the class {}".format(a, float.__name__))
+if is_same_class(a, object):
+    print("{} is an instance of the class {}".format(a, object.__name__))
