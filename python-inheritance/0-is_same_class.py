@@ -15,5 +15,5 @@ if is_same_class(obj, object):
     this documentation for my method
     """
 __doc__="""
-this documentation for my class
+this documentation for my function
 """
