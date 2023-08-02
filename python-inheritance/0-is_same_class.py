@@ -10,3 +10,10 @@ if is_same_class(obj, float):
     print("{}".format(float.__name__))
 if is_same_class(obj, object):
     print("{}".format(object.__name__))
+    
+    __doc__="""
+    this documentation for my method
+    """
+__doc__="""
+this documentation for my class
+"""
