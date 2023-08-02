@@ -1,19 +1,7 @@
 #!/usr/bin/python3
+"""Module containing is_same_class method"""
 def is_same_class(obj, a_class):
-    return type(obj) is a_class
-class MyClass:
-    pass
-obj = MyClass()
-if is_same_class(obj, int):
-    print("{}".format(int.__name__))
-if is_same_class(obj, float):
-    print("{}".format(float.__name__))
-if is_same_class(obj, object):
-    print("{}".format(object.__name__))
-    
-    __doc__="""
-    this documentation for my method
-    """
-__doc__="""
-this is for function
-"""
+    """Returns:
+    True: if the object is exactly an instance of the specified class
+    False: otherwise"""
+    return type(obj) == a_class
