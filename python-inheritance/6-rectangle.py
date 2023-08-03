@@ -12,9 +12,7 @@ class Rectangle(BaseGeometry):
     def __dir__(cls) -> None:
         # get list of all attributes for this class and exclude __init_subclass
         attributes = super().__dir__()
-
-        list_to_return = []
-
         attrs = super().__dir__()
         attrs.remove('__init_subclass__')
-        return attrs
+        list_to_return = attrs
+        return list_to_return
