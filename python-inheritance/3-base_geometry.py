@@ -6,7 +6,7 @@ class BaseGeometry():
         pass
     
     ___doc___="""
-BaseGeometry empty class
+class doc
 """
 __doc__ = """
 pass
