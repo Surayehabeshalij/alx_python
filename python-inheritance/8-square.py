@@ -13,6 +13,4 @@ class Square(Rectangle):
     def area(self):
         """Method that returns area of a square"""
         return self.__size ** 2
-    def __dir__(cls) -> None:
-        attributes = super().__dir__()
-        return [attribute for attribute in attributes if attribute != '__init_subclass__']
+    
