@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """BaseGeometry class Module"""
 class BaseGeometry():
-     attrs.remove('__init_subclass__')
-     return attrs
      def __dir__(cls):
           attrs = dir(type(cls))
           attrs.remove('__init_subclass__')
