@@ -5,5 +5,6 @@ class BaseGeometry():
         attributes = super().__dir__()
         pass
     """BaseGeometry empty class"""
-"""BaseGeometry empty class"""
-    
+___doc___="""
+BaseGeometry empty class
+"""   
