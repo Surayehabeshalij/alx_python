@@ -15,9 +15,6 @@ class Rectangle(BaseGeometry):
 
         list_to_return = []
 
-        for attr in attributes:
-            if attr != "__init_subclass__":
-                # append this to the list_to_return
-                list_to_return.append(attr)
-
-        return list_to_return
+        attrs = super().__dir__()
+        attrs.remove('__init_subclass__')
+        return attrs
