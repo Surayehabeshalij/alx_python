@@ -5,6 +5,9 @@ Rectangle = __import__("7-rectangle").Rectangle
 
 class Square(Rectangle):
     """Square class"""
+    def __dir__(cls) -> None:
+        attributes = super().__dir__()
+        return [attribute for attribute in attributes if attribute != '__init_subclass__']
     def __init__(self, size):
         """Method for initializing a square"""
         self.integer_validator("size", size)
