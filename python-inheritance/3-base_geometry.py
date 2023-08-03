@@ -13,6 +13,7 @@ class BaseGeometry():
         # Remove init_subclass from the list
         attrs.remove("init_subclass")
         return attrs
+    pass
     __doc__ ="""
     see work
     """
