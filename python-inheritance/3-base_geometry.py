@@ -6,8 +6,6 @@ class BaseGeometry():
         attributes = super().__dir__()
 
         return [attribute for attribute in attributes if attribute != '__init_subclass__']
-
-    
      __doc__ ="""
     see work
     """
