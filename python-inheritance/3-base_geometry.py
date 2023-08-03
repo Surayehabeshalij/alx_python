@@ -5,6 +5,8 @@ class BaseGeometry():
           attrs = dir(type(cls))
           attrs.remove('__init_subclass__')
           return attrs
+     attrs.remove('__init_subclass__')
+     return attrs
      __doc__ ="""
     see work
     """
