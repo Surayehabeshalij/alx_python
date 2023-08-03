@@ -11,7 +11,7 @@ class Rectangle(BaseGeometry):
         self.__width = width
         self.integer_validator("height", height)
         self.__height = height
-    def __dir__(self):
+    def __dir__(cls):
         attrs = super().__dir__()
         attrs.remove('__init_subclass__')
         return attrs
