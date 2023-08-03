@@ -4,10 +4,6 @@ class BaseGeometry():
     def __dir__(self):
         attributes = super().__dir__()
         pass
-    
-    ___doc___="""
-class doc
-"""
 __doc__ = """
 pass
 """
