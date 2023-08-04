@@ -16,7 +16,7 @@ Your module documentation goes here
 """
 
 
-class ObedMetaClass(type):
+class BaseGeometry(type):
     """
     documentation
     """
@@ -24,7 +24,7 @@ class ObedMetaClass(type):
         return [attribute for attribute in super().__dir__() if attribute != '__init_subclass__']
 
 
-class ObedClass(metaclass=ObedMetaClass):
+class ObedClass(metaclass=BaseGeometry):
     """
     documentation for class goes here
     """
