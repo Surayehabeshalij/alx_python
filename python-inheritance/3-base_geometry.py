@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """BaseGeometry class Module"""
-class BaseGeometry(type):
-    
-    def __dir__(cls):
-        return [attribute for attribute in super().__dir__() if attribute != '__init_subclass__']
+class BaseGeometry():
+
+    def __dir__(cls) -> None:
+        attributes = super().__dir__()
+        return [attribute for attribute in attributes if attribute != '__init_subclass__']
+    __doc__ ="""
+    see work
     """
-    documentation
-    """
-__doc__="""
-documentation for class 
+__doc__ = """
+pass
 """
