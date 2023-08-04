@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 """Rectangle class Module"""
-BaseGeometry = __import__("5-base_geometry").BaseGeometry
+class BaseGeometry:
+    def integer_validator(self, name, value):
+        if not isinstance(value, int):
+            raise ValueError(f"{name} must be an integer")
+        if value <= 0:
+            raise ValueError(f"{name} must be a positive integer")
+
+
 class Rectangle(BaseGeometry):
-    """Rectangle class"""
     def __init__(self, width, height):
-        """Initilize rectangle method"""
-        self.integer_validator("width", width)
         self.__width = width
-        self.integer_validator("height", height)
         self.__height = height
-    def __dir__(Self) -> None:
-        # get list of all attributes for this class and exclude __init_subclass
-        attrs = super().__dir__()
-        attrs.remove('__init_subclass__')
-        list_to_return = attrs
-        return list_to_return
+        self.integer_validator("width", width)
+        self.integer_validator("height", height)
