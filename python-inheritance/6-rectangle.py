@@ -14,6 +14,9 @@ class Rectangle(BaseGeometry):
         self.__height = height
         self.integer_validator("width", width)
         self.integer_validator("height", height)
+    def __dir__(cls) -> None:
+        attributes = super().__dir__()
+        return [attribute for attribute in attributes if attribute != '__init_subclass__']
     __doc__="""
     this is documentation for function
     """
