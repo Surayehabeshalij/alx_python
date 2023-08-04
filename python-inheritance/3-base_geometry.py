@@ -1,14 +1,7 @@
 #!/usr/bin/python3
 """BaseGeometry class Module"""
 class BaseGeometry():
-
-    def __dir__(cls):
-        return [attribute for attribute in super().__dir__() if attribute != '__init_subclass__']
-
     
-    def __dir__(cls):
-        return [attribute for attribute in super().__dir__() if attribute != '__init_subclass__']
-
     def __dir__(cls) -> None:
         attributes = super().__dir__()
         return [attribute for attribute in attributes if attribute != '__init_subclass__']
@@ -18,3 +11,24 @@ class BaseGeometry():
 __doc__ = """
 pass
 """
+"""
+Your module documentation goes here
+"""
+
+
+class ObedMetaClass(type):
+    """
+    documentation
+    """
+    def __dir__(cls):
+        return [attribute for attribute in super().__dir__() if attribute != '__init_subclass__']
+
+
+class ObedClass(metaclass=ObedMetaClass):
+    """
+    documentation for class goes here
+    """
+    
+    def __dir__(cls):
+        return [attribute for attribute in super().__dir__() if attribute != '__init_subclass__']
+
