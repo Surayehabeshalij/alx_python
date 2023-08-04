@@ -9,10 +9,7 @@ class Rectangle(BaseGeometry):
         self.__width = width
         self.integer_validator("height", height)
         self.__height = height
-    def __dir__(cls) -> None:
-        # get list of all attributes for this class and exclude __init_subclass
-        attributes = super().__dir__()
+    def __dir__(self):
         attrs = super().__dir__()
         attrs.remove('__init_subclass__')
-        list_to_return = attrs
-        return list_to_return
+        return attrs
