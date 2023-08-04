@@ -7,6 +7,6 @@ class BaseGeometry(type):
     """
     documentation
     """
-"""
+__doc__="""
 documentation for class 
 """
