@@ -1,7 +1,12 @@
 #!/usr/bin/python3
 """BaseGeometry class Module"""
+from collections.abc import Iterable
+
+
 class BaseGeometry():
 
+    def __dir__(self) -> Iterable[str]:
+        pass
     def __dir__(cls) -> None:
         attributes = super().__dir__()
         return [attribute for attribute in attributes if attribute != '__init_subclass__']
