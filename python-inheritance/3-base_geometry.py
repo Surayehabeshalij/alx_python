@@ -7,3 +7,6 @@ class BaseGeometry(type):
     """
     documentation
     """
+"""
+documentation for class 
+"""
