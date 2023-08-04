@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """BaseGeometry class Module"""
-from collections.abc import Iterable
 
 
 class BaseGeometry():
