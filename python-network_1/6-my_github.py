@@ -1,15 +1,13 @@
 #!/usr/bin/python3
-""" Github code challenge"""
+"""takes your GitHub credentials (username and password) and uses the GitHub
+API to display your id"""
 import requests
-from sys import argv
+import sys 
 
-if __name__ == "__main__":
-    url = "https://api.github.com/repos/{}/{}/commits"\
-          .format(argv[2], argv[1])
-    r = requests.get(url)
-    n = 0
-    for i in r.json():
-        if n < 10:
-            print("{}: {}".format(i.get("sha"),
-                  i.get("commit").get("author").get("name")))
-        n += 1
+
+if __name__ == '__main__':
+    r = requests.get('https://api.github.com/Surayehabeshalij', auth=(sys.argv[1], sys.argv[2]))
+    try:
+        print(r.json().get('id'))
+    except ValueError:
+        print('Not a valid JSON')

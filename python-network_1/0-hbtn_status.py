@@ -4,8 +4,11 @@ Python script that fetches an URL with requests package
 """
 import requests
 
+url = "https://alu-intranet.hbtn.io/status"
 
-if __name__ == "__main__":
-    r = requests.get('https://alu-intranet.hbtn.io/status')
-    t = r.text
-    print('Body response:\n\t- type: {}\n\t- content: {}'.format(type(t), t))
+response = requests.get(url)
+
+print("Body response:")
+print(f"\t- type: {str(type(response.text))}")
+print(f"\t- content: {response.text}")
+print(f"\t- length: {len(response.text)}")
