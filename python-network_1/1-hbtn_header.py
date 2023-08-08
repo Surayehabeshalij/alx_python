@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-"""Takes URL sends request and displays value of X-Request-Id"""
-import urllib.request
-from sys import argv
+"""Takes URL, sends a request and displays the value of X-Request-Id"""
+import requests
+import sys
 
-if len(argv) > 1:
-    with urllib.request.urlopen(argv[1]) as response:
-        print(response.getheader("X-Request-Id"))
+
+
+if __name__ == '__main__':
+    r = requests.get(sys.argv[1])
+    print(r.headers.get('x-Request-Id'))
