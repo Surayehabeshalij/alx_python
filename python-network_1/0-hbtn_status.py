@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Fetches https://alx-intranet.hbtn.io/status"""
 import urllib.request
-
+import requests
 
 if __name__ == "__main__":
     request = urllib.request.Request("https://alx-intranet.hbtn.io/status")
