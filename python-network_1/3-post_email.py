@@ -2,7 +2,7 @@
 """takes url & email, sends a POST request and displays the response"""
 import requests
 import sys
-from urllib import request, parse
+from urllib import request
 from sys import argv
 
 
