@@ -5,7 +5,7 @@ import sys
 
 if __name__ == '__main__':
     url = sys.argv[1]
-    response = requests.get(url)
+    response = requests.get("http://0.0.0.0:5000")
 
     if response.status_code == 200:
         print(response.text)
