@@ -2,14 +2,14 @@
 """takes url & email, sends a POST request and displays the response"""
 import requests
 import sys
-from urllib import request
-from sys import argv
 
+def send_post_request(url, email):
+    data = {'email': email}
+    response = requests.post(url, data=data)
+    return response.text
 
-if len(argv) > 2:
-    email = {'email': argv[2]}
-    data = parse.urlencode(email).encode('ascii')
-    req = request.Request(argv[1], data)
-    with request.urlopen(req) as response:
-        r = response.read()
-        print(r.decode('utf-8'))
+if __name__ == '__main__':
+    url = sys.argv[1]
+    email = sys.argv[2]
+    response_body = send_post_request(url, email)
+    print(response_body)
