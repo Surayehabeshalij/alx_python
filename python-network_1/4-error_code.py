@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """takes url & email, sends a POST request and displays the response"""
+import requests
+import sys
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
-from sys import argv
 
 if __name__ == '__main__':
-    req = Request(argv[1])
+    req = Request(sys.argv[1])
     try:
         with urlopen(req) as response:
             r = response.read()
