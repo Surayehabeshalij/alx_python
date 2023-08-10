@@ -18,9 +18,9 @@ def retrieve_x_request_id(url):
         print(f'An error occurred: {e}')
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
+    """if len(sys.argv) < 2:
         print('Please provide a URL as an argument.')
-        sys.exit(1)
+        sys.exit(1)"""
 
     url = sys.argv[1]
     retrieve_x_request_id(url)
