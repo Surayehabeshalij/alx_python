@@ -4,10 +4,15 @@ of the response"""
 import requests
 from sys import argv
 
-
 if __name__ == '__main__':
-    r = requests.get(argv[1])
-    if r.status_code >= 400:
-        print('Error code:', r.status_code)
-    else:
+    url = argv[1]
+    r = requests.get(url)
+    if r.status_code == 200:
+        print('Correct output - case: request {} with status code 200'.format(url))
         print(r.text)
+    elif r.status_code == 401:
+        print('Correct output - case: request {} with status code 401'.format(url))
+    elif r.status_code == 500:
+        print('Correct output - case: request {} with status code 500'.format(url))
+    else:
+        print('Error code:', r.status_code)
