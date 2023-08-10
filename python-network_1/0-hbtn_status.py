@@ -2,9 +2,12 @@
 """Fetches https://alx-intranet.hbtn.io/status."""
 import requests
 
-
-if __name__ == "__main__":
+ur1 = "https://alx-intranet.hbtn.io/status"
+response= requests.get(ur1)
+if response.status_code == 200:
     r = requests.get("https://alx-intranet.hbtn.io/status")
     print("Body response:")
-    print("\t- type: {}".format(type(r.text)))
-    print("\t- content: {}".format(r.text))
+    print("\t- type: ", type(response.text))
+    print("\t- content: " , response.text)
+else:
+    print("Error:" ,response.status_code )
