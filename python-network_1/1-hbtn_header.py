@@ -2,7 +2,6 @@
 """Displays the X-Request-Id header variable of a request to a given URL.
 Usage:  <URL>
 """
-#!/usr/bin/python3
 """Takes URL, sends a request and displays the value of X-Request-Id"""
 import requests
 import sys
