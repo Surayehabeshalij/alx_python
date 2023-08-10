@@ -8,6 +8,7 @@ import sys
 def retrieve_x_request_id(url):
     try:
         response = requests.get(url)
+        response.raise_for_status()  # Check for HTTP errors
         x_request_id = response.headers.get('X-Request-Id')
         if x_request_id:
             print(f'The value of X-Request-Id is: {x_request_id}')
