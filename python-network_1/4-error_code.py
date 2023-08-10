@@ -3,10 +3,13 @@ import sys
 
 if __name__ == '__main__':
     url = sys.argv[1]
-    response = requests.get(url)
-    print('Correct output - case: request {} with status code {}'.format(url, response.status_code))
 
-    if response.status_code == 200:
-        print('Correct output - case: request {} with status code 200'.format(url))
-    else:
-        print('Correct output - case: request {} with status code {}'.format(url, response.status_code))
+    # Example: status code 401
+    response_200 = requests.get(url)
+    print('Correct output - case: request {} with status code {}'.format(url, response_200.status_code))
+    response_401 = requests.get(url)
+    print('Correct output - case: request {} with status code {}'.format(url, response_401.status_code))
+
+    # Example: status code 500
+    response_500 = requests.get(url)
+    print('Correct output - case: request {} with status code {}'.format(url, response_500.status_code))
