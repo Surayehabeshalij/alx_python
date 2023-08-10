@@ -10,5 +10,7 @@ if __name__ == '__main__':
 
     if response.status_code >= 400:
         print('Error code:', response.status_code)
+    elif response.status_code <= 400:
+        print('Error code:', response.status_code)
     else:
         print(response.text)
