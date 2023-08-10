@@ -1,15 +1,13 @@
+#!/usr/bin/python3
+"""takes in a URL, sends a request to the URL and displays the body
+of the response"""
 import requests
-import sys
+from sys import argv
+
 
 if __name__ == '__main__':
-    url = sys.argv[1]
-
-    # Example: status code 401
-    response_200 = requests.get(url)
-    print('Correct output - case: request {} with status code {}'.format(url, response_200.status_code))
-    response_401 = requests.get(url)
-    print('Correct output - case: request {} with status code {}'.format(url, response_401.status_code))
-
-    # Example: status code 500
-    response_500 = requests.get(url)
-    print('Correct output - case: request {} with status code {}'.format(url, response_500.status_code))
+    r = requests.get(argv[1])
+    if r.status_code >= 400:
+        print('Error code:', r.status_code)
+    else:
+        print(r.text)
