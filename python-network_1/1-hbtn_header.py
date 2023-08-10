@@ -21,5 +21,5 @@ if __name__ == '__main__':
         print('Please provide a URL as an argument.')
         sys.exit(1)
 
-    url = sys.argv[0]
+    url = sys.argv[1]
     retrieve_x_request_id(url)
