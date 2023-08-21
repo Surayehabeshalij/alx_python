@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 '''
-All states via SQLAlchemy
-'''
+All states via SQLAlchemy'''
 from sys import argv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker

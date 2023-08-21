@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 '''
-lists all State objects that contain the letter a
-'''
+lists all State objects that contain the letter a'''
 from sys import argv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
