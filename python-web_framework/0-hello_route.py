@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 '''
-   so we install the flask pakage
-'''
+   so we install the flask pakage'''
 from flask import Flask
 
 app = Flask(__name__)
+
 
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
