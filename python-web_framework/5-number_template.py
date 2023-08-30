@@ -30,7 +30,7 @@ def display_number(n):
     return '{} is a number'.format(n)
 
 @app.route('/5-number_template/<int:n>', strict_slashes=False)
-def display_number_template(n):
+def display_number1_template(n):
     return render_template('5-number.html', n=n)
 
 if __name__ == '__main__':
