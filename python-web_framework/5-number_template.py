@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-here to see the final numeber code
+   here to see the final numeber code
 """
 from flask import Flask, render_template
 
@@ -28,9 +28,7 @@ def python1(text="is cool"):
     new_text = text.replace("_", " ")
     return "Python %s" % new_text
 
-"""
-   try to do here same thing to get
-"""
+
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
     return "%d is a number" % n
