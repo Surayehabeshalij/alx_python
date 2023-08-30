@@ -12,7 +12,6 @@ def hello_hbnb():
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    Print(number)
     return 'HBNB'
 
 @app.route('/c/<text>', strict_slashes=False)
@@ -32,6 +31,7 @@ def display_number(n):
 
 @app.route('/5-number_template/<int:number>', strict_slashes=False)
 def display_number_template(number):
+    print(number)
     return render_template('5-number.html', number=number)
 
 if __name__ == '__main__':
