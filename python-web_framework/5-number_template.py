@@ -12,6 +12,7 @@ def hello_hbnb():
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    Print(number)
     return 'HBNB'
 
 @app.route('/c/<text>', strict_slashes=False)
