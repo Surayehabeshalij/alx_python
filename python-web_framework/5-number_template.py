@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-'''
-   so we install the flask pakage
-'''
 """
 Is it a number?
 /number/<n>: display “n is a number” only if n is an integer
