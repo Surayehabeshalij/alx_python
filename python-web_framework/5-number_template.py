@@ -28,6 +28,10 @@ def c(text):
 def display_number1(n):
     return render_template('5-number.html', n=n)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8d2e64d4481e33aaa90a2337e9e640225aee5323
 @app.route("/python/", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python1(text="is cool"):
@@ -35,8 +39,8 @@ def python1(text="is cool"):
     return "Python %s" % new_text
 
 """
-Is it a number?
-/number/<n>: display “n is a number” only if n is an integer
+   Is it a number?
+   /number/<n>: display “n is a number” only if n is an integer
 """
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
