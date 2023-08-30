@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<HTML lang="en">
+<HTML >
 <HEAD>
     <TITLE>Number Parity</TITLE>
 </HEAD>
 <BODY>
-    {% if n%2==0 %}
-    <H1>Number {{ n }} i s odd</H1>
-    {% else %}
-    <H1>.....................</H1>
+    {% parity='even' if n % 2 == 0 else 'odd' %}
+    <H1>Number: {{ number }} is {{ parity }}</H1>
 </BODY>
 </HTML>

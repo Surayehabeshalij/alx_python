@@ -36,7 +36,7 @@ def display_number_template(n):
 
 @app.route('/number_odd_or_even_template/<int:n>', strict_slashes=False)
 def display_number_odd_or_even(n):
-    return render_template('6-number_odd_or_even.html', n=n, parity='even' if n % 2 == 0 else 'odd')
+    return render_template('6-number_odd_or_even.html', n=n)
 '''
    so we install the flask pakage
 '''
