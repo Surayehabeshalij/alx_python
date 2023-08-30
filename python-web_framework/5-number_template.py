@@ -1,44 +1,37 @@
 #!/usr/bin/python3
-"""
-   here to see the final numeber code
-"""
+'''
+   so we install the flask pakage
+'''
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route("/", strict_slashes=False)
-def hello():
-    return "Hello HBNB!"
+@app.route('/', strict_slashes=False)
+def hello_hbnb():
+    return 'Hello HBNB!'
 
-
-@app.route("/hbnb", strict_slashes=False)
+@app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    return "HBNB"
+    return 'HBNB'
 
+@app.route('/c/<text>', strict_slashes=False)
+def display_ctext(text):
+    text = text.replace('', ' ')
+    return 'C {}'.format(text)
 
-@app.route("/c/<text>", strict_slashes=False)
-def c(text):
-    new_text = text.replace("_", " ")
-    return "C %s" % new_text
+@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def display_pythontext(text):
+    text = text.replace('', ' ')
+    return 'Python {}'.format(text)
 
+@app.route('/number/<int:n>', strict_slashes=False)
+def display_number(n):
+    return '{} is a number'.format(n)
 
-@app.route("/python/", strict_slashes=False)
-@app.route("/python/<text>", strict_slashes=False)
-def python1(text="is cool"):
-    new_text = text.replace("_", " ")
-    return "Python %s" % new_text
+@app.route('/5-number_template/<int:n>', strict_slashes=False)
+def display_number_template(n):
+    return render_template('5-number.html', n=n)
 
-
-@app.route("/number/<int:n>", strict_slashes=False)
-def number(n):
-    return "%d is a number" % n
-
-
-@app.route("/number_template/<int:n>", strict_slashes=False)
-def number1(n):
-    print(n)
-    return render_template("5-number.html", n=n)
-
-
-if __name__ == "main":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
