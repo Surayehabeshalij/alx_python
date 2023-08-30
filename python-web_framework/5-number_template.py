@@ -22,12 +22,6 @@ def c(text):
     return "C %s" % new_text
 
 
-
-@app.route('/number_template/<int:n>', strict_slashes=False)
-def display_number1(n):
-    return render_template('5-number.html', n=n)
-
-
 @app.route("/python/", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python1(text="is cool"):
