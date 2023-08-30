@@ -2,9 +2,6 @@
 '''
    so we install the flask pakage
 '''
-'''
-so we install the flask pakage
-'''
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -32,9 +29,12 @@ def display_pythontext(text):
 def display_number(n):
     return '{} is a number'.format(n)
 
-@app.route('number_template/<int:n>', strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
 def display_number_template(n):
     return render_template('5-number.html', n=n)
 
+'''
+   so we install the flask pakage
+'''
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
