@@ -29,7 +29,10 @@ def python1(text="is cool"):
     new_text = text.replace("_", " ")
     return "Python %s" % new_text
 
-
+"""
+Is it a number?
+/number/<n>: display “n is a number” only if n is an integer
+"""
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
     return "%d is a number" % n
