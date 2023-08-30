@@ -5,7 +5,7 @@ Is it a number?
 """
 from flask import Flask, render_template
 
-app = Flask(name)
+app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello():
@@ -23,17 +23,16 @@ def c(text):
     return "C %s" % new_text
 
 
-<<<<<<< HEAD
+
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def display_number1(n):
     return render_template('5-number.html', n=n)
-=======
+
 @app.route("/python/", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python1(text="is cool"):
     new_text = text.replace("_", " ")
     return "Python %s" % new_text
->>>>>>> aa810fb74adcea5908d93860425c1762931ec963
 
 """
 Is it a number?
@@ -50,5 +49,5 @@ def number1(n):
     return render_template("5-number.html", n=n)
 
 
-if name == "main":
+if __name__ == "main":
     app.run(host="0.0.0.0", port=5000)
