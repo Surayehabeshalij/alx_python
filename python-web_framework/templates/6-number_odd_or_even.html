@@ -4,7 +4,9 @@
     <TITLE>Number Parity</TITLE>
 </HEAD>
 <BODY>
-    {% parity='even' if n % 2 == 0 else 'odd' %}
-    <H1>Number: {{ number }} is {{ parity }}</H1>
+    {% if n%2==0 %}
+    <h1>Number {{ n }} i s odd</h1>
+    {% else %}
+    <h1>.....................</h1>
 </BODY>
 </HTML>
