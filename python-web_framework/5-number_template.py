@@ -27,13 +27,13 @@ def c(text):
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def display_number1(n):
     return render_template('5-number.html', n=n)
-=======
+
+
 @app.route("/python/", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python1(text="is cool"):
     new_text = text.replace("_", " ")
     return "Python %s" % new_text
->>>>>>> aa810fb74adcea5908d93860425c1762931ec963
 
 """
 Is it a number?
