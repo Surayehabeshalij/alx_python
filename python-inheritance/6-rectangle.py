@@ -3,7 +3,7 @@
 BaseGeometry = __import__("5-base_geometry").BaseGeometry
 class Rectangle(BaseGeometry):
     """Rectangle class"""
-     def __dir__(cls) -> None:
+    def __dir__(cls) -> None:
         attributes = super().__dir__()
         return [attribute for attribute in attributes if attribute != '__init_subclass__']
     def __init__(self, width, height):
