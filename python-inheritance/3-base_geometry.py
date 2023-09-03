@@ -1,14 +1,7 @@
 #!/usr/bin/python3
-"""BaseGeometry class Module"""
-class BaseGeometry():
+"""An empty class"""
 
-    
-    def __dir__(cls) -> None:
-        attributes = super().__dir__()
-        return [attribute for attribute in attributes if attribute != '__init_subclass__']
-    __doc__ ="""
-    see work
-    """
-__doc__ = """
-pass
-"""
+
+class BaseGeometry:
+    """This is an empty class"""
+    pass
