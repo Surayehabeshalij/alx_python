@@ -1,9 +1,31 @@
-#!/usr/bin/python3
-"""An empty class"""
-class BaseGeometry:
-    """This is an empty class"""
-    pass
-    """This is an empty class"""
-    def __dir__(cls) -> None:
-        attributes = super().__dir__()
-        return [attribute for attribute in attributes if attribute != '__init_subclass__']
+""" class: BaseGeometry """
+
+class BaseGeometry(type):
+    """ every thing in python is an object soo the class is also an object.
+    so if it is an object it have type.type is a metaclass, of which classes
+    are instances. Just as an ordinary object is an instance of a class, 
+    any new-style class in Python, and thus any class in Python 3, 
+    is an instance of the type metaclass """
+    def dir(cls):
+        """ remove the init subclass"""
+        attributes = super().dir()
+        list_to_return = []
+        for att in attributes:
+            if att != "init_subclass":
+                list_to_return.append(att)
+        return list_to_return
+
+class BaseGeometry(metaclass=BaseGeometry):
+    
+    """ Metaclasses allow for code to manipulate classes.
+    Often this change happens when an object of the class is instantiated
+    """
+
+    def dir(cls):
+        """ remove the init subclass"""
+        attributes = super().dir()
+        list_to_return = []
+        for att in attributes:
+            if att != "init_subclass":
+                list_to_return.append(att)
+        return list_to_return
