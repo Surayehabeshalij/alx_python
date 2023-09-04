@@ -1,5 +1,4 @@
 """ class: BaseGeometry """
-
 class BaseGeometry(type):
     """ every thing in python is an object soo the class is also an object.
     so if it is an object it have type.type is a metaclass, of which classes
@@ -22,7 +21,7 @@ class BaseGeometry(metaclass=BaseGeometry):
     """
 
     def __dir__(cls):
-        """ remove the init subclass""”
+        """ remove the init subclass"""
         attributes = super().__dir__()
         list_to_return = []
         for att in attributes:
