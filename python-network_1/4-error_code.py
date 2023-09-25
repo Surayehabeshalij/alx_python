@@ -1,26 +1,24 @@
 #!/usr/bin/python3
 """takes in a URL, sends a request to the URL and displays the body
 of the response"""
-#!/usr/bin/python3
-"""Send a request to the url and print the response"""
-
-from requests import get
-from sys import argv
+"""import sys and requests
+    sends a request to the URL
+    check if the staus code is above 400 or not. """
 
 
-def request_header_property(url: str) -> str:
-    """
-    Send a request to the URL specified and
-    get the response and handle exceptions
-    Args:
-        url (str): The URL to query
-    """
-    response = get(url)
-    if int(response.status_code) >= 400:
-        return ("Error code: {}".format(response.status_code))
+import sys
+import requests
 
-    return response.text
+def main():
+    url = sys.argv[1]
+    r = requests.get(url)
 
+    r1 = r.status_code
 
+    if r1 >= 400:
+        print("Error code: {}".format(r1))
+    elif r1 < 400:
+        print("Regular request")
+    
 if __name__ == "__main__":
-    print(request_header_property(argv[1]))
+     main()
