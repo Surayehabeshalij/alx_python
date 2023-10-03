@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+""" 2-export_to_JSON
+
+    Export data in the JSON format.
+"""
 import json
 import requests
 import sys
