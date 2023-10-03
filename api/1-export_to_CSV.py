@@ -1,64 +1,26 @@
 #!/usr/bin/python3
-"""A python script that returns information about an
-employees TODO list progress.
-"""
-import csv
-import json
-import requests
-import sys
+"""fetche https://intranet.hbtn.io/status"""
 
+from csv import DictWriter, QUOTE_ALL
+from requests import get
+from sys import argv
 
-def get_employee_data(employee_id):
-    # Define the base URL for the JSONPlaceholder API
-    base_url = "https://jsonplaceholder.typicode.com"
-
-    # Construct the URLs for employee details and TODO list
-    employee_url = f"{base_url}/users/{employee_id}"
-    todo_url = f"{base_url}/users/{employee_id}/todos"
-
-    # Fetch employee details
-    try:
-        response = requests.get(employee_url)
-        response.raise_for_status()
-        employee_data = response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching employee details: {e}")
-        sys.exit(1)
-
-    # Fetch TODO list
-    try:
-        response = requests.get(todo_url)
-        response.raise_for_status()
-        todo_data = response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching TODO list: {e}")
-        sys.exit(1)
-
-    return employee_data, todo_data
-
-def export_to_csv(employee_data, todo_data):
-    # Extract relevant information
-    employee_id = employee_data["id"]
-    employee_name = employee_data["username"]
-
-    # Create a CSV file with the employee ID as the filename
-    filename = f"{employee_id}.csv"
-    with open(filename, mode="w", newline="") as csv_file:
-        csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)  # Quote all fields
-        csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-        for task in todo_data:
-            csv_writer.writerow([str(employee_id), employee_name, str(task["completed"]), task["title"]])
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python export_to_CSV.py <employee_id>")
-        sys.exit(1)
+    main_url = "https://jsonplaceholder.typicode.com"
+    todo_url = main_url + "/user/{}/todos".format(argv[1])
+    name_url = main_url + "/users/{}".format(argv[1])
+    todo_result = get(todo_url).json()
+    name_result = get(name_url).json()
 
-    try:
-        employee_id = int(sys.argv[1])
-    except ValueError:
-        print("Employee ID must be an integer.")
-        sys.exit(1)
-
-    employee_data, todo_data = get_employee_data(employee_id)
-    export_to_csv(employee_data, todo_data)
+    todo_list = []
+    for todo in todo_result:
+        todo_dict = {}
+        todo_dict.update({"user_ID": argv[1], "username": name_result.get(
+            "username"), "completed": todo.get("completed"),
+            "task": todo.get("title")})
+        todo_list.append(todo_dict)
+    with open("{}.csv".format(argv[1]), 'w', newline='') as f:
+        header = ["user_ID", "username", "completed", "task"]
+        writer = DictWriter(f, fieldnames=header, quoting=QUOTE_ALL)
+        writer.writerows(todo_list)
