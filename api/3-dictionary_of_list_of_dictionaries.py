@@ -1,34 +1,32 @@
 #!/usr/bin/python3
-"""Script that exports to json file
-    """
-
+"""Returns information about TODO list progress"""
 import json
-from requests import get
-
-
-def main():
-    task_res = get("https://jsonplaceholder.typicode.com/todos")
-    user_res = get(
-        "https://jsonplaceholder.typicode.com/users")
-    filename = "todo_all_employees.json"
-
-    with open(filename, "w") as f:
-        final_dict = {}
-        for user in user_res.json():
-            employee_name = user.get("username")
-            employee_id = user.get("id")
-            task_list = []
-            for task in task_res.json():
-                if task.get("userId") == employee_id:
-                    temp = {}
-                    temp["username"] = employee_name
-                    temp["task"] = task.get("title")
-                    temp["completed"] = task.get("completed")
-                    task_list.append(temp)
-
-            final_dict[employee_id] = task_list
-        json.dump(final_dict, f)
+import requests
+import sys
 
 
 if __name__ == "__main__":
-    main()
+    url_users = 'https://jsonplaceholder.typicode.com/users'
+    url_todos = 'https://jsonplaceholder.typicode.com/todos'
+    r_users = requests.get(url_users)
+    r_todos = requests.get(url_todos)
+    r_obj_users = r_users.json()
+    r_obj_todos = r_todos.json()
+    task_list = {}
+    my_list = []
+
+    for users in r_obj_users:
+            user_name = users.get('username')
+            for entry in r_obj_todos:
+                my_dict = {}
+                id_number = entry.get('userId')
+                my_dict["task"] = entry.get('title')
+                my_dict["completed"] = entry.get('completed')
+                my_dict["username"] = user_name
+                my_list.append(my_dict)
+                task_list['{}'.format(id_number)] = my_list
+
+    with open('todo_all_employees.json',
+              mode='w', encoding='utf-8') as file_open:
+        f = json.dumps(task_list)
+        file_open.write(f)
