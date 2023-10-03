@@ -1,25 +1,27 @@
 #!/usr/bin/python3
-'''
-A script to export data in the JSON format
-'''
-import json
-import requests
+"""Exports data in the JSON format"""
 
-if __name__ == '__main__':
-    url = "https://jsonplaceholder.typicode.com/users"
-    us = requests.get(url, verify=False).json()
-    undoc = {}
-    udoc = {}
-    for user in us:
-        uid = user.get("id")
-        udoc[uid] = []
-        undoc[uid] = user.get("username")
-    url = "https://jsonplaceholder.typicode.com/todos"
-    todo = requests.get(url, verify=False).json()
-    [udoc.get(t.get("userId")).append({"task": t.get("title"),
-                                       "completed": t.get("completed"),
-                                       "username": undoc.get(
-                                               t.get("userId"))})
-     for t in todo]
-    with open("todo_all_employees.json", 'w') as jsf:
-        json.dump(udoc, jsf)
+if __name__ == "__main__":
+
+    import json
+    import requests
+    import sys
+
+    users = requests.get("https://jsonplaceholder.typicode.com/users")
+    users = users.json()
+    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
+    todos = todos.json()
+    todoAll = {}
+
+    for user in users:
+        taskList = []
+        for task in todos:
+            if task.get('userId') == user.get('id'):
+                taskDict = {"username": user.get('username'),
+                            "task": task.get('title'),
+                            "completed": task.get('completed')}
+                taskList.append(taskDict)
+        todoAll[user.get('id')] = taskList
+
+    with open('todo_all_employees.json', mode='w') as f:
+        json.dump(todoAll, f)
