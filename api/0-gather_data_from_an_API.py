@@ -1,54 +1,27 @@
+#!/usr/bin/python3
+'''
+Python script that returns information using REST API
+'''
 import requests
-import sys
-
-def get_employee_data(employee_id):
-    # Define the base URL for the JSONPlaceholder API
-    base_url = "https://jsonplaceholder.typicode.com"
-
-    # Construct the URLs for employee details and TODO list
-    employee_url = f"{base_url}/users/{employee_id}"
-    todo_url = f"{base_url}/users/{employee_id}/todos"
-
-    # Fetch employee details
-    try:
-        response = requests.get(employee_url)
-        response.raise_for_status()
-        employee_data = response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching employee details: {e}")
-        sys.exit(1)
-
-    # Fetch TODO list
-    try:
-        response = requests.get(todo_url)
-        response.raise_for_status()
-        todo_data = response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching TODO list: {e}")
-        sys.exit(1)
-
-    return employee_data, todo_data
-
-def display_todo_progress(employee_data, todo_data):
-    # Extract relevant information
-    employee_name = employee_data.get("name")
-    completed_tasks = [task for task in todo_data if task["completed"]]
-    total_tasks = len(todo_data)
-
-    # Display employee TODO list progress
-    print(f"Employee {employee_name} is done with tasks({len(completed_tasks)}/{total_tasks}):")
-    for task in completed_tasks:
-        print(f"\t{task['title']}")
+from sys import argv
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python gather_data_from_an_API.py <employee_id>")
-        sys.exit(1)
-
-    try:
-        employee_id = int(sys.argv[1])
-    except ValueError:
-        print("Employee ID must be an integer.")
-        sys.exit(1)
-    employee_data, todo_data = get_employee_data(employee_id)
-    display_todo_progress(employee_data, todo_data)
+    if len(argv) > 1:
+        user = argv[1]
+        url = "https://jsonplaceholder.typicode.com/"
+        req = requests.get("{}users/{}".format(url, user))
+        name = req.json().get("name")
+        if name is not None:
+            jreq = requests.get(
+                "{}todos?userId={}".format(
+                    url, user)).json()
+            alltsk = len(jreq)
+            completedtsk = []
+            for t in jreq:
+                if t.get("completed") is True:
+                    completedtsk.append(t)
+            count = len(completedtsk)
+            print("Employee {} is done with tasks({}/{}):"
+                  .format(name, count, alltsk))
+            for title in completedtsk:
+                print("\t {}".format(title.get("title")))
