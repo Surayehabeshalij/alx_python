@@ -1,42 +1,42 @@
 #!/usr/bin/python3
-"""
-Check student .CSV output of user information
-"""
+'''
+A script to export data in the CSV format.
+'''
 
 import csv
 import requests
 import sys
 
-users_url = "https://jsonplaceholder.typicode.com/users?id="
-todos_url = "https://jsonplaceholder.typicode.com/todos"
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Please provide the employee ID as a parameter.")
+        sys.exit(1)
 
+    employee_id = sys.argv[1]
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    todos_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
 
-def user_info(id):
-    """ Check user information """
+    try:
+        user_response = requests.get(user_url)
+        user_response.raise_for_status()
+        user = user_response.json()
 
-    total_tasks = 0
-    response = requests.get(todos_url).json()
-    for i in response:
-        if i['userId'] == id:
-            total_tasks += 1
+        todos_response = requests.get(todos_url)
+        todos_response.raise_for_status()
+        todos = todos_response.json()
 
-    response = requests.get(users_url + str(id)).json()
-    username = response[0]['username']
+        if len(todos) == 0:
+            print("No tasks found for the specified employee ID.")
+            sys.exit(1)
 
-    flag = 0
-    with open(str(id) + ".csv", 'r') as f:
-        for line in f:
-            if not line == '\n':
-                if not str(id) in line:
-                    print("User ID: Incorrect / ", end='')
-                    flag = 1
-                if not str(username) in line:
-                    print("Username: Incorrect")
-                    flag = 1
+        filename = f"{employee_id}.csv"
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+            for todo in todos:
+                task_completed_status = "Completed" if todo['completed'] else "Incomplete"
+                writer.writerow([employee_id, user['username'], task_completed_status, todo['title']])
 
-    if flag == 0:
-        print("User ID and Username: OK")
-
-
-if __name__ == "__main__":
-    user_info(int(sys.argv[1]))
+        print(f"Data exported to {filename}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
