@@ -2,28 +2,61 @@
 """fetche https://intranet.hbtn.io/status"""
 
 import csv
-import json
 import requests
 import sys
 
+
+def get_employee_data(employee_id):
+    # Define the base URL for the JSONPlaceholder API
+    base_url = "https://jsonplaceholder.typicode.com"
+
+    # Construct the URLs for employee details and TODO list
+    employee_url = f"{base_url}/users/{employee_id}"
+    todo_url = f"{base_url}/users/{employee_id}/todos"
+
+    # Fetch employee details
+    try:
+        response = requests.get(employee_url)
+        response.raise_for_status()
+        employee_data = response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching employee details: {e}")
+        sys.exit(1)
+
+    # Fetch TODO list
+    try:
+        response = requests.get(todo_url)
+        response.raise_for_status()
+        todo_data = response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching TODO list: {e}")
+        sys.exit(1)
+
+    return employee_data, todo_data
+
+def export_to_csv(employee_data, todo_data):
+    # Extract relevant information
+    employee_id = employee_data["id"]
+    employee_name = employee_data["username"]
+
+    # Create a CSV file with the employee ID as the filename
+    filename = f"{employee_id}.csv"
+    with open(filename, mode="w", newline="") as csv_file:
+        csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)  # Quote all fields
+        csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+        for task in todo_data:
+            csv_writer.writerow([str(employee_id), employee_name, str(task["completed"]), task["title"]])
+
 if __name__ == "__main__":
-    employee_id = sys.argv[1]
-    api_request = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(employee_id))
-    api_request1 = requests.get("https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id))
-    data = api_request.text
-    pjson = json.loads(data)
-    data1 = api_request1.text
-    pjson1 = json.loads(data1)
+    if len(sys.argv) != 2:
+        print("Usage: python export_to_CSV.py <employee_id>")
+        sys.exit(1)
 
-    name_info = pjson['name']
+    try:
+        employee_id = int(sys.argv[1])
+    except ValueError:
+        print("Employee ID must be an integer.")
+        sys.exit(1)
 
-    #export data to csv data
-    filename = "{}.csv".format(employee_id)
-    with open(filename, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile, quoting = csv.QUOTE_ALL)
-        for item in pjson1:
-            user_id = employee_id
-            username = name_info
-            task_completed_status = item['completed']
-            task_title = item['title']
-            writer.writerow([user_id, username, task_completed_status, task_title])
+    employee_data, todo_data = get_employee_data(employee_id)
+    export_to_csv(employee_data, todo_data)
