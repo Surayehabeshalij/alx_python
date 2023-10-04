@@ -11,26 +11,32 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Please provide the employee ID as a parameter.")
         sys.exit(1)
-        
-    uid = sys.argv[1]
-    user_url = f"https://jsonplaceholder.typicode.com/users/{uid}"
-    todo_url = f"https://jsonplaceholder.typicode.com/todos?userId={uid}"
+
+    employee_id = sys.argv[1]
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    todos_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
 
     try:
         user_response = requests.get(user_url)
         user_response.raise_for_status()
         user = user_response.json()
-        
-        todo_response = requests.get(todo_url)
-        todo_response.raise_for_status()
-        todo = todo_response.json()
-        
-        with open(f"{uid}.csv", 'w', newline='') as csvfile:
-            taskwriter = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-            for t in todo:
-                taskwriter.writerow([int(uid), user.get('username'),
-                                     t.get('completed'),
-                                     t.get('title')])
-        print(f"Data exported to {uid}.csv")
+
+        todos_response = requests.get(todos_url)
+        todos_response.raise_for_status()
+        todos = todos_response.json()
+
+        if len(todos) == 0:
+            print("No tasks found for the specified employee ID.")
+            sys.exit(1)
+
+        filename = f"{employee_id}.csv"
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+            for todo in todos:
+                task_completed_status = "Completed" if todo['completed'] else "Incomplete"
+                writer.writerow([employee_id, user['username'], task_completed_status, todo['title']])
+
+        print(f"Data exported to {filename}")
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
