@@ -9,7 +9,17 @@ if __name__ == "__main__":
     userId = sys.argv[1]
     user = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(userId))
 
-    name = user.json().get('name')
+    if user.status_code != 200:
+        print("Failed to retrieve user data. Please check the employee ID.")
+        sys.exit(1)
+
+    try:
+        name = user.json().get('name')
+        if not name:
+            raise ValueError("Username not found.")
+    except (KeyError, ValueError) as e:
+        print("Failed to retrieve username:", str(e))
+        sys.exit(1)
 
     todos = requests.get('https://jsonplaceholder.typicode.com/todos')
 
