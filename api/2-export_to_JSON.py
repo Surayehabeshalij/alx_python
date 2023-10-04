@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Exports data in the JSON format"""
 
+import json
 import requests
 import sys
-import json
 
 def get_employee_data(employee_id):
     # Define the base URL for the JSONPlaceholder API
