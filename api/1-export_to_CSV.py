@@ -1,53 +1,73 @@
 #!/usr/bin/python3
-"""script that fetches info about a given employee using an api
-and exports it in csv format
 """
-import json
+Write a Python script that, using this REST API,
+for a given employee ID, returns information about
+his/her TODO list progress and exports it in CSV format.
+"""
+
+import pandas as pd
 import requests
 import sys
 
+def get_employee_data(employee_id):
+    # Define the base URL for the JSONPlaceholder API
+    base_url = "https://jsonplaceholder.typicode.com"
 
-base_url = 'https://jsonplaceholder.typicode.com'
+    # Construct the URLs for employee details and TODO list
+    employee_url = f"{base_url}/users/{employee_id}"
+    todo_url = f"{base_url}/users/{employee_id}/todos"
+
+    # Fetch employee details
+    try:
+        response = requests.get(employee_url)
+        response.raise_for_status()
+        employee_data = response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching employee details: {e}")
+        sys.exit(1)
+
+    # Fetch TODO list
+    try:
+        response = requests.get(todo_url)
+        response.raise_for_status()
+        todo_data = response.json()
+    except requests.exceptions.RequestException as e:        
+        print(f"Error fetching TODO list: {e}")
+        sys.exit(1)
+
+    return employee_data, todo_data
+
+def export_to_csv(employee_data, todo_data):
+    # Extract relevant information
+    user_id = employee_data.get("id")
+    username = employee_data.get("username")
+
+    # Create a DataFrame for the TODO list
+    todo_df = pd.DataFrame(todo_data)
+
+    # Select relevant columns and add user-specific data
+    todo_df = todo_df[["completed", "title"]]
+    todo_df["user_id"] = user_id
+    todo_df["username"] = username
+
+    # Rename columns
+    todo_df = todo_df.rename(columns={"completed": "TASK_COMPLETED_STATUS", "title": "TASK_TITLE"})
+
+    # Save to CSV
+    csv_filename = f"{user_id}.csv"
+    todo_df.to_csv(csv_filename, index=False)
+    print(f"Data exported to {csv_filename}")
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python gather_data_from_an_API.py <employee_id>")
+        sys.exit(1)
 
-    user_id = sys.argv[1]
+    try:
+        employee_id = int(sys.argv[1])
+    except ValueError:
+        print("Employee ID must be an integer.")
+        sys.exit(1)
 
-    # get user info e.g https://jsonplaceholder.typicode.com/users/1/
-    user_url = '{}/users?id={}'.format(base_url, user_id)
-    # print("user url is: {}".format(user_url))
-
-    # get info from api
-    response = requests.get(user_url)
-    # pull data from api
-    data = response.text
-    # parse the data into JSON format
-    data = json.loads(data)
-    # extract user data, in this case, username of employee
-    user_name = data[0].get('username')
-    # print("id is: {}".format(user_id))
-    # print("name is: {}".format(user_name))
-
-    # get user info about todo tasks
-    # e.g https://jsonplaceholder.typicode.com/users/1/todos
-    tasks_url = '{}/todos?userId={}'.format(base_url, user_id)
-    # print("tasks url is: {}".format(tasks_url))
-
-    # get info from api
-    response = requests.get(tasks_url)
-    # pull data from api
-    tasks = response.text
-    # parse the data into JSON format
-    tasks = json.loads(tasks)
-
-    # build the csv
-    builder = ""
-    for task in tasks:
-        builder += '"{}","{}","{}","{}"\n'.format(
-            user_id,
-            user_name,
-            task['completed'],  # or use get method
-            task['title']
-        )
-    with open('{}.csv'.format(user_id), 'w', encoding='UTF8') as myFile:
-        myFile.write(builder)
+    employee_data, todo_data = get_employee_data(employee_id)
+    export_to_csv(employee_data, todo_data)
