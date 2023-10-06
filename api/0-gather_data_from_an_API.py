@@ -4,59 +4,36 @@ Write a Python script that, using this REST API,
 for a given employee ID, returns information about
 his/her TODO list progress
 """
-
+import json
 import requests
 import sys
 
-def get_employee_data(employee_id):
-    # Define the base URL for the JSONPlaceholder API
-    base_url = "https://jsonplaceholder.typicode.com"
-
-    # Construct the URLs for employee details and TODO list
-    employee_url = f"{base_url}/users/{employee_id}"
-    todo_url = f"{base_url}/users/{employee_id}/todos"
-
-    # Fetch employee details
-    try:
-        response = requests.get(employee_url)
-        response.raise_for_status()
-        employee_data = response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching employee details: {e}")
-        sys.exit(1)
-
-    # Fetch TODO list
-    try:
-        response = requests.get(todo_url)
-        response.raise_for_status()
-        todo_data = response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching TODO list: {e}")
-        sys.exit(1)
-
-    return employee_data, todo_data
-
-def display_todo_progress(employee_data, todo_data):
-    # Extract relevant information
-    employee_name = employee_data.get("name")
-    completed_tasks = [task for task in todo_data if task["completed"]]
-    total_tasks = len(todo_data)
-
-    # Display employee TODO list progress
-    print(f"Employee {employee_name} is done with tasks({len(completed_tasks)}/{total_tasks}):")
-    for task in completed_tasks:
-        print(f"\t {task['title']}")
-
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python gather_data_from_an_API.py <employee_id>")
-        sys.exit(1)
+    emplooye_id = sys.argv[1]
+    api_request = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(emplooye_id))
+    api_request1 = requests.get("https://jsonplaceholder.typicode.com/users/{}/todos".format(emplooye_id))
+    data = api_request.text
+    pjson = json.loads(data)
+    data1 = api_request1.text
+    pjson1 = json.loads(data1)
 
-    try:
-        employee_id = int(sys.argv[1])
-    except ValueError:
-        print("Employee ID must be an integer.")
-        sys.exit(1)
+    title_count = 0
+    title_complete = 0
+    name_info = pjson['name']
 
-    employee_data, todo_data = get_employee_data(employee_id)
-    display_todo_progress(employee_data, todo_data)
+# count the todo list and completed or not
+
+    for itemss in pjson1:
+        if 'title' in itemss:
+            title_count += 1 
+        if (itemss['completed'] == True):
+            title_complete += 1
+
+    print("Employee {} is done with tasks({}/{}):".format(name_info, title_complete, title_count))
+
+# print all completed titles 
+
+    for items in pjson1:
+        if (items['completed'] == True):
+            tasks_name = items['title']
+            print("\t {}".format(tasks_name))
