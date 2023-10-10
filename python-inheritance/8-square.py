@@ -1,18 +1,24 @@
 #!/usr/bin/python3
-"""Defines a base geometry class BaseGeometry."""
+#!/usr/bin/python3
 """
-parent class: BaseGeometry
-child class: Rectangle
+Write a class Rectangle that inherits from BaseGeometry (5-base_geometry.py).
 """
-
 Rectangle = __import__('7-rectangle').Rectangle
 
+
 class Square(Rectangle):
-    """ the class inherite from rectangle """
+    """
+    a class define for square that inherit Rectangle
+    """
     def __init__(self, size):
-        """use the rectangle methods"""
-        self.integer_validator("size", size)
+        """
+        initialization method for class Square
+        """
+        Rectangle.integer_validator(self, "size", size)
         self.__size = size
-        super().__init__(size, size)
-        self.__str__()
-        self.area()
+
+    def area(self):
+        """
+        Method to calculate area
+        """
+        return self.__size ** 2
